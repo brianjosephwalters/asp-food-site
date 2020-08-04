@@ -1,5 +1,6 @@
 ### Ode to Food
 *  Course offering by Pluralsight: [ASP .Net Core Fundamentals](https://app.pluralsight.com/library/courses/aspnet-core-fundamentals/table-of-contents)
+*  npm install dependencies before running.
 
 #### Module 2: Drilling Into Data
 
@@ -112,8 +113,27 @@
 	* Also create the view in the Shared folder, since components can be used anywhere in application.
 		* Under Components/ComponentName (without ViewComponent)
 		* File called Default, which is what ASP .Net Core will search for unless specified.
-	* Don't forget to import in _ViewImports.
-	* use <vc:component-name>
+	* Don't forget to import in `_ViewImports`.
+	* use `<vc:component-name>`
 	* Ask for parameters in the Invoke() method, then pass into element by name.
-
 * Quick Scaffolding from Models
+
+### Module 7 - Working with Client-side Libraries
+* Serving static assets
+	* environment tags help to restrict areas of code based on environments
+	* launchsettings sets things like environments
+* Client-side validation
+	* JQuery Validation Unobtrusive that ties asp .net core validation and jquery validation.
+	* not included by default, but can be added to _ValidationScriptsPartial.cshtml
+		* Only really needed on our form views (Create, Edit)
+	* @RenderSection("Scripts", required: false) is were asp.net can add _ValidationScriptsPartial.
+		You just need to provide that section in your page.
+* Building API-based sites.
+	* can do this with ASP .Net Core pages by just not taking advantage of the models.
+	* scaffold a basic API controller by creating a new `API Controller with actions, using EF`
+	* in Core 3, you need to configure the controllers separately.
+* Serving NPM modules
+	* npm install modules from root of the main project (not solution)
+	* Adding node_modules folder to server application requires app.UseNodeModules()
+
+
