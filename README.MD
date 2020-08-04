@@ -136,4 +136,17 @@
 	* npm install modules from root of the main project (not solution)
 	* Adding node_modules folder to server application requires app.UseNodeModules()
 
-
+### Module 8 - Internals of ASP .Net Core
+* Run the application from commandline using `dotnet run`.
+	* Not IIS
+	* launch settings describes the different run options
+* Configure sets up middleware
+	* Middleware is a series of handlers on a request and response.
+	* First middleware either wants to handle the request first or handle the response last (or both).
+	* Middleware is a method that takes a RequestDelegate and returns a RequestDelegate.
+		* method parameter is the "next" middleware request delegate.
+		* if you don't invoke next() then the middleware pipeline ends
+	* A RequestDelegate is a method that takes the HttpContext and returns a Task.
+* Logging
+	* configured in appsettings.json
+	* Logging Service
