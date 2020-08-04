@@ -70,6 +70,50 @@
 		* Typically, services should be scoped to a request.
 		* Allows DbContext to collect all of the changes made in a single request.
 
+### Module 6: Building the User Interface
+* Pages vs. Partial Views
+	* @page allows template to respond to a URL.
+	* directives are just Razor Views.  
+	* leading underscores is not required but indicates the .cshtml should not render view on its own.  It's a part of something else.
 
+* Layouts
+	* How does a Page know where to plug in its content?
+		* Always in the @RenderBody() portion of the _Layout view.
+		* @RenderSection("name") can allow other views to put content into these section.
+			* can specify whether it is required or not.
+			* In Page, use @section name {} to identify part of a page that goes in the @RenderSection
+	* How can it choose another place to put its content?
+		* @{Layout = } in the template to specify.
+		* By default, it will search in a few different locations for that layout file.
+		* If you don't specify a Layout in the template, then the _ViewStart.cshtml default is used.
+* ViewImports.cshtml
+	* Add using statements that will be included in all other pages in the folder.
+	* Sets default namespace
+	* Adds tag helpers to make them work.
+* Partial Views
+	* Break up large pages into smaller pieces.
+	* Reuses html
+	* Don't create a cs file for it.  They should receive their data from the parent view.
+		* Remove @page directive
+		* give it a model.
+	* partial is a tag help as a full element.
+		* name, model
+* View Components
+	* Partial Views with their own data access.
+	* Layout views are partial views, so these also don't have a way to do data access.
+	* Creating Pages with sections just for this seems like it would get repetitive.
+		* Tend to use ViewData[] as a property for passing information to _Layout.
+		* Lots of pages will set things like ViewData["Title"] in their opening code blocks of the view because the _Layout page needs it.
+			* Would get difficult to manage over time.
+	* More similar to MVC framework than Razor Pages.
+	* Don't respond to Http requests.
+	* ASP .Net Core calls `IViewComponent Invoke()`
+		* return a View() and pass the model data.  Can pass the view name as first parameter too.
+	* Also create the view in the Shared folder, since components can be used anywhere in application.
+		* Under Components/ComponentName (without ViewComponent)
+		* File called Default, which is what ASP .Net Core will search for unless specified.
+	* Don't forget to import in _ViewImports.
+	* use <vc:component-name>
+	* Ask for parameters in the Invoke() method, then pass into element by name.
 
-
+* Quick Scaffolding from Models
