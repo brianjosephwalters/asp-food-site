@@ -56,6 +56,20 @@
 	1. `Microsoft.EntityFrameworkCore`
 	2. `Microsoft.EntityFrameworkCore.SqlServer`
 	3. `Microsoft.EntityFrameworkCore.Design`
+* Create a class that extends DbContext from Microsoft.EntityFrameworkCore
+	* Create DbSet<> for types of data stored in the database.
+	* Identify the connection string for the database and store it the appsettings.json
+	* Use the conncetion string in the ConfigureServices() method, passing the connection string as option.
+	* Make sure the DbContext class has a contructor that can take the options parameter and pass it to the base class.
+* Add Database migrations.
+	* .Data project doesn't have access to all of the stuff it needs.  
+	* Add dependencies to each project.
+	* Attach() tells EF to track the object.  Set it as modified. Issue an update statement on SaveChanges();
+	* Use Commit
+	* Update ConfigureServices() and changed from AddSingleton to AddScoped
+		* Typically, services should be scoped to a request.
+		* Allows DbContext to collect all of the changes made in a single request.
+
 
 
 
