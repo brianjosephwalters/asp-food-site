@@ -150,3 +150,32 @@
 * Logging
 	* configured in appsettings.json
 	* Logging Service
+
+### Module 9 - Publishing and Deploying ASP .Net Core Applications
+* Publishing vs. Deploying
+	* Publish step makes sure all of the files you need are in a particular location.
+		* Most Visual Studio publish steps include both publish and deploy.
+		* We'll use command line.
+* Publishing:
+	* `dotnet publish` alongside the .csproj file builds the application.  You can specify custom output locations.
+	* node_modules is not included by default.
+	* MSBuild knows how to process a .csproj file.
+	* You can update Targets and add new ones.  Use this to execute npm install.
+	* dotnet OdeToFood.dll starts the application
+* Self-Contained
+	* Without this, target framework must already be installed.
+	* Requires a runtime identifier
+	* Will now use the .exe file insead of dotnet OdeToFood.dll (the host may not have the dotnet tool installed)
+* Deploying to IIS
+	* Besides self-contained build, also need the .Net Core Hosting Bundle installed on IIS (ANCM ASP .NET CORE MODULE)
+	* web.config isn't used anymore, but is still used by IIS.  
+		* IIS will look for this to understand its configuration.
+* Running migrations on startup
+	* Separate Build from Run in Program.
+	* Need access to the DbContext:
+		1.  Get a scope with: `using (var scope = host.Services.CreateScope());`
+		2.  Get the dbService with `var db = scope.ServiceProvider.GetRequiredService<DbContext>();`
+		3.  Use the Api to execute the migrations: `db.Database.Migrate();`
+			* Applies any pending migration to the database, etc.
+	* You still need to have permissions to create databases if they don't already exist.
+
